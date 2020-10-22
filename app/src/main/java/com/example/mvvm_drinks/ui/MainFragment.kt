@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.mvvm_drinks.R
 import com.example.mvvm_drinks.data.model.DataSource
+import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.domain.RepositoryImpl
 import com.example.mvvm_drinks.ui.ViewModel.MainAdapter
 import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
@@ -22,7 +23,8 @@ import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import com.example.mvvm_drinks.vo.Resource
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment() {
+// IMPLEMENTING CLICK LISTENER OF ADAPTER
+class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
 
 
     val viewModel by viewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSource())) }
@@ -53,7 +55,8 @@ class MainFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_main.adapter = MainAdapter(requireContext(), result.data)
+                    // PASS CLICK LISTENER, AS A LAST PARAMETER (THIS)
+                    rv_main.adapter = MainAdapter(requireContext(), result.data, this)
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
@@ -68,5 +71,11 @@ class MainFragment : Fragment() {
     private fun setUpRecyclerView(){
         rv_main.layoutManager = LinearLayoutManager(requireContext())
         rv_main.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+    }
+
+    override fun onMovieClick(movie: Movie) {
+        val bundle = Bundle()
+        bundle.putParcelable("movie", movie)
+        findNavController().navigate(R.id.detailMovie, bundle)
     }
 }
