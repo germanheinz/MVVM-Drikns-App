@@ -4,14 +4,14 @@ import com.example.mvvm_drinks.vo.Resource
 
 class DataSource {
 
-    private val generateMoviesList = listOf<Movie>(
-        Movie("imageFromDataSource", "nameFromDataSource"),
-        Movie("imageFromDataSource", "nameFromDataSource"),
-        Movie("imageFromDataSource", "nameFromDataSource"),
-        Movie("imageFromDataSource", "nameFromDataSource"))
+    val generateMoviesList = Resource.Success(listOf<Movie>(
+        Movie("imageFromDataSource", "nameFromDataSource", "Description"),
+        Movie("imageFromDataSource", "nameFromDataSource", "Description"),
+        Movie("imageFromDataSource", "nameFromDataSource", "Description"),
+        Movie("imageFromDataSource", "nameFromDataSource", "Description"))
+    )
 
-
-    fun getMoviesList() : Resource<List<Movie>>{
-        return Resource.Success(generateMoviesList)
-    }
+//    fun getMoviesList() : Resource<List<Movie>>{
+//        return Resource.Success(generateMoviesList)
+//    }
 }
