@@ -5,5 +5,6 @@ import com.example.mvvm_drinks.vo.Resource
 
 interface Repository {
 
-    fun getMovies() : Resource<List<Movie>>
+    suspend fun getMovies(movieName: String) : Resource<List<Movie>>
+
 }

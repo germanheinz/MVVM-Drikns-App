@@ -6,8 +6,8 @@ import com.example.mvvm_drinks.vo.Resource
 
 class RepositoryImpl(private val dataSource: DataSource) : Repository{
 
-    override fun getMovies(): Resource<List<Movie>> {
-        return dataSource.generateMoviesList
+    override suspend fun getMovies(movieName : String): Resource<List<Movie>> {
+        return dataSource.getMovieByName(movieName)
     }
 
 }

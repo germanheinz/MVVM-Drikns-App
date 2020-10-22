@@ -36,7 +36,10 @@ class MainAdapter(private val context: Context, private val listOfMovies:List<Mo
     // RETURN EACH ELEMENT OF THE LIST
     inner class MainViewHolder(itemView: View) : BaseViewHolder<Movie>(itemView){
         override fun bind(movie: Movie, position: Int) {
-//            Glide.with(context).load(movie.imageMovie).into(itemView.img_movie)
+
+            val imageUrl = "https://image.tmdb.org/t/p/w500/${movie.imageMovie}"
+
+            Glide.with(context).load(imageUrl).into(itemView.img_movie)
             itemView.movieName_row.text   = movie.name
             itemView.description_row.text = movie.description
 

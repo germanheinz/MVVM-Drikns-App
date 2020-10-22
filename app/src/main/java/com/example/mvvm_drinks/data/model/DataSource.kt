@@ -1,17 +1,12 @@
 package com.example.mvvm_drinks.data.model
 
 import com.example.mvvm_drinks.vo.Resource
+import com.example.mvvm_drinks.vo.RetrofitClient
 
 class DataSource {
 
-    val generateMoviesList = Resource.Success(listOf<Movie>(
-        Movie("imageFromDataSource", "nameFromDataSource", "Description"),
-        Movie("imageFromDataSource", "nameFromDataSource", "Description"),
-        Movie("imageFromDataSource", "nameFromDataSource", "Description"),
-        Movie("imageFromDataSource", "nameFromDataSource", "Description"))
-    )
+    suspend fun getMovieByName(movieName : String): Resource<List<Movie>>{
+        return Resource.Success(RetrofitClient.webService.searchMovie(movieName).movieList)
+    }
 
-//    fun getMoviesList() : Resource<List<Movie>>{
-//        return Resource.Success(generateMoviesList)
-//    }
 }
