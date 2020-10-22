@@ -3,10 +3,17 @@ package com.example.mvvm_drinks
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.mvvm_drinks.data.model.DataSource
+import com.example.mvvm_drinks.data.model.Movie
+import com.example.mvvm_drinks.domain.RepositoryImpl
+import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
+import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 
 // TODO - NAV - 1 - CREATE IN RES A NEW "ANDROID RESOURCE FILE" WITH VALUE NAVIGATION
 // TODO - NAV - 2 - CREATE THE FRAGMENT TO NAVIGATE BETWEEN THEM
@@ -14,6 +21,8 @@ import androidx.navigation.ui.NavigationUI
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+
+    val viewModel by viewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSource()))}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
