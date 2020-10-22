@@ -1,18 +1,18 @@
 package com.example.mvvm_drinks.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.mvvm_drinks.R
 import com.example.mvvm_drinks.data.model.DataSource
 import com.example.mvvm_drinks.data.model.Movie
@@ -26,6 +26,8 @@ import kotlinx.android.synthetic.main.fragment_main.*
 // IMPLEMENTING CLICK LISTENER OF ADAPTER
 class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
 
+    private val handler: Handler = Handler()
+    private var runnable: Runnable? = null
 
     val viewModel by viewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSource())) }
 
@@ -44,10 +46,13 @@ class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        buttonToGoDetail.setOnClickListener {
-//            findNavController().navigate(R.id.detailMovie)
-//        }
         setUpRecyclerView()
+        setUpSearchView()
+        setUpObserver()
+
+
+    }
+    private fun setUpObserver(){
         viewModel.fetchMovieList.observe(viewLifecycleOwner, Observer { result ->
             when(result){
                 is Resource.Loading -> {
@@ -65,8 +70,8 @@ class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
                 }
             }
         })
-
     }
+
     // METHOD TO SETUP RECYCLERVIEW
     private fun setUpRecyclerView(){
         rv_main.layoutManager = LinearLayoutManager(requireContext())
@@ -77,5 +82,22 @@ class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
         val bundle = Bundle()
         bundle.putParcelable("movie", movie)
         findNavController().navigate(R.id.detailMovie, bundle)
+    }
+
+    private fun setUpSearchView(){
+        searcher.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setMovieName(query!!)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                handler.removeCallbacks(runnable)
+                runnable = Runnable { viewModel.setMovieName(newText!!) }
+                handler.postDelayed(runnable, 500)
+
+                return false
+            }
+        })
     }
 }

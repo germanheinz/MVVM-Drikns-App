@@ -11,7 +11,7 @@ interface WebService {
     @GET("top_rated?api_key=81f888823f079b9941a4534f90d59f34&language=en-US&page=1")
     suspend fun getMovies() : MovieList
 
-    @GET("movie?api_key=81f888823f079b9941a4534f90d59f34&language=en-US&page=1&include_adult=false&query=batman")
-    suspend fun searchMovie(@Query("movieName") movieName : String) : MovieList
+    @GET("movie?api_key=81f888823f079b9941a4534f90d59f34&language=en-US&page=1&include_adult=false&query=")
+    suspend fun searchMovie(@Query(value="query") movieName : String) : MovieList
 
 }
