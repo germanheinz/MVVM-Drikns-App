@@ -1,25 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movieDetailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_gravity="top"
     android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
-    <TextView
+
+<RelativeLayout
+    android:id="@+id/imagesHeaderDetail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageMovieDetail"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="top"
+        android:scaleType="centerCrop"
+        android:layout_margin="0dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:id="@+id/linearLMovieName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="FRAGMENT 2"
-        android:textSize="25sp" />
+        android:layout_marginTop="165dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imagePosterDetail"
+            android:layout_width="70dp"
+            android:layout_height="90dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/ic_launcher_background"/>
 
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonDetail"-->
-    <!--        android:gravity="center"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Back to List"/>-->
+        <TextView
+            android:id="@+id/movieNameDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FRAGMENT 2"
+            android:layout_marginTop="43dp"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="#000">
+        </TextView>
 
-</LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/like"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:layout_below="@+id/imagesHeaderDetail">
+
+    <TextView
+        android:id="@+id/descritionMovieDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="15dp"
+        android:text="teteteteaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></TextView>
+</RelativeLayout>
+
+
+</RelativeLayout>

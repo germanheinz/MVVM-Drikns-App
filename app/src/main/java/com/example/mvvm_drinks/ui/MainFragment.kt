@@ -81,7 +81,7 @@ class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
     override fun onMovieClick(movie: Movie) {
         val bundle = Bundle()
         bundle.putParcelable("movie", movie)
-        findNavController().navigate(R.id.detailMovie, bundle)
+        findNavController().navigate(R.id.action_mainFragment_to_detailMovie, bundle)
     }
 
     private fun setUpSearchView(){
