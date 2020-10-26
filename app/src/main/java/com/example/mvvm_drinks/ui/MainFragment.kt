@@ -9,14 +9,13 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm_drinks.AppDataBase
 import com.example.mvvm_drinks.R
-import com.example.mvvm_drinks.data.model.DataSource
+import com.example.mvvm_drinks.data.model.DataSourceImpl
 import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.domain.RepositoryImpl
 import com.example.mvvm_drinks.ui.ViewModel.MainAdapter
@@ -24,7 +23,6 @@ import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
 import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import com.example.mvvm_drinks.vo.Resource
 import kotlinx.android.synthetic.main.fragment_main.*
-import java.text.FieldPosition
 
 // IMPLEMENTING CLICK LISTENER OF ADAPTER
 class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
@@ -32,7 +30,7 @@ class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
     private val handler: Handler = Handler()
     private var runnable: Runnable? = null
 
-    val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSource(
+    val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSourceImpl(
         AppDataBase.getDataBase(requireActivity().applicationContext)))) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

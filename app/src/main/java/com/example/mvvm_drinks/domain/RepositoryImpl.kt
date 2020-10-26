@@ -1,6 +1,6 @@
 package com.example.mvvm_drinks.domain
 
-import com.example.mvvm_drinks.data.model.DataSource
+import com.example.mvvm_drinks.data.model.DataSourceImpl
 import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.data.model.MovieEntity
 import com.example.mvvm_drinks.vo.Resource
