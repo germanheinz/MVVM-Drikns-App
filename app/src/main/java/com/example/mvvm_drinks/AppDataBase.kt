@@ -20,7 +20,7 @@ abstract class AppDataBase: RoomDatabase() {
         private var INSTANCE: AppDataBase? = null
 
         fun getDataBase(context: Context): AppDataBase{
-            INSTANCE = INSTANCE ?: Room.databaseBuilder(context, AppDataBase::class.java, "movie_table").build()
+            INSTANCE = INSTANCE ?: Room.databaseBuilder(context, AppDataBase::class.java, "movie_db_room").build()
             return INSTANCE!!
         }
         fun destroyInstance(){

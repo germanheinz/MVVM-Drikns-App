@@ -6,17 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
+import com.example.mvvm_drinks.AppDataBase
 
 import com.example.mvvm_drinks.R
+import com.example.mvvm_drinks.data.model.DataSource
 import com.example.mvvm_drinks.data.model.Movie
+import com.example.mvvm_drinks.data.model.MovieEntity
+import com.example.mvvm_drinks.domain.RepositoryImpl
+import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
+import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import kotlinx.android.synthetic.main.fragment_detail_movie.*
 import kotlinx.android.synthetic.main.fragment_detail_movie.view.*
 import kotlinx.android.synthetic.main.fragment_detail_movie.view.movieNameDetail
 import kotlinx.android.synthetic.main.movie_row.view.*
+import kotlinx.coroutines.launch
 
 
 class DetailMovieFragment : Fragment() {
+
+    val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSource(
+        AppDataBase.getDataBase(requireActivity().applicationContext)))) }
 
     private lateinit var movie: Movie
 
@@ -51,5 +64,11 @@ class DetailMovieFragment : Fragment() {
         movieNameDetail.text       = movie.name
         descritionMovieDetail.text = movie.description
 
+        btn_like.setOnClickListener {
+            viewModel.saveMovie(MovieEntity(movie.movieId, movie.imageMovie,movie.imageMoviePoster, movie.name, movie.description))
+            Toast.makeText(requireContext(), "Saved in favorites!", Toast.LENGTH_SHORT).show()
+        }
+
     }
+
 }

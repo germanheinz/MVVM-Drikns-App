@@ -17,10 +17,18 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailMovie"
         android:name="com.example.mvvm_drinks.ui.DetailMovieFragment"
         android:label="Detail"
         tools:layout="@layout/fragment_detail_movie" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.mvvm_drinks.ui.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>
