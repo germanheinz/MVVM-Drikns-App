@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.movie_row.view.*
 class MainAdapter(private val context: Context, private val listOfMovies:List<Movie>, private val itemClickListener: OnMoviewClickListener) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnMoviewClickListener{
-        fun onMovieClick(movie: Movie)
+        fun onMovieClick(movie: Movie, position: Int)
     }
 
 
@@ -43,7 +43,7 @@ class MainAdapter(private val context: Context, private val listOfMovies:List<Mo
             itemView.description_row.text = movie.description
 
             //ADDING CLICK LISTENER
-            itemView.setOnClickListener { itemClickListener.onMovieClick(movie) }
+            itemView.setOnClickListener { itemClickListener.onMovieClick(movie, position) }
         }
 
     }

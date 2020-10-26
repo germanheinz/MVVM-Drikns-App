@@ -23,6 +23,7 @@ import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
 import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import com.example.mvvm_drinks.vo.Resource
 import kotlinx.android.synthetic.main.fragment_favorites.*
+import java.text.FieldPosition
 
 class FavoritesFragment : Fragment(), MainAdapter.OnMoviewClickListener {
 
@@ -72,8 +73,12 @@ class FavoritesFragment : Fragment(), MainAdapter.OnMoviewClickListener {
         rv_favorites_movies.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
-    override fun onMovieClick(movie: Movie) {
-        Toast.makeText(requireContext(), "click in favorite Movie", Toast.LENGTH_SHORT).show()
+    override fun onMovieClick(movie: Movie, position: Int) {
+        Toast.makeText(requireContext(), "Movie Deleted from favorites", Toast.LENGTH_SHORT).show()
+        val movie = MovieEntity(movie.movieId, movie.imageMovie, movie.imageMoviePoster, movie.name, movie.description)
+        viewModel.deleteFavoriteMovie(movie)
+        rv_favorites_movies.adapter?.notifyItemRemoved(position)
+        rv_favorites_movies.adapter?.notifyItemRangeRemoved(position, rv_favorites_movies.adapter?.itemCount!!)
     }
 }
 

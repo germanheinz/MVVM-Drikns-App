@@ -24,6 +24,7 @@ import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
 import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import com.example.mvvm_drinks.vo.Resource
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.text.FieldPosition
 
 // IMPLEMENTING CLICK LISTENER OF ADAPTER
 class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
@@ -84,7 +85,7 @@ class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
         rv_main.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
-    override fun onMovieClick(movie: Movie) {
+    override fun onMovieClick(movie: Movie, position: Int) {
         val bundle = Bundle()
         bundle.putParcelable("movie", movie)
         findNavController().navigate(R.id.action_mainFragment_to_detailMovie, bundle)

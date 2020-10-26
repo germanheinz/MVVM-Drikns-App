@@ -18,4 +18,8 @@ class RepositoryImpl(private val dataSource: DataSource) : Repository{
     override suspend fun saveFavorite(movie: MovieEntity) {
         dataSource.saveMovieIntoRoom(movie)
     }
+
+    override suspend fun deleteFavorite(movie: MovieEntity) {
+        dataSource.deleteFavoritesMovies(movie)
+    }
 }

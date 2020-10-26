@@ -9,5 +9,6 @@ interface Repository {
     suspend fun getMovies(movieName: String) : Resource<List<Movie>>
     suspend fun getFavoritesMovies(): Resource<List<MovieEntity>>
     suspend fun saveFavorite(movie: MovieEntity)
+    suspend fun deleteFavorite(movie : MovieEntity)
 
 }

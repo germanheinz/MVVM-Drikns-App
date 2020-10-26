@@ -1,6 +1,7 @@
 package com.example.mvvm_drinks.ui.ViewModel
 
 import androidx.lifecycle.*
+import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.data.model.MovieEntity
 import com.example.mvvm_drinks.domain.Repository
 import com.example.mvvm_drinks.vo.Resource
@@ -43,6 +44,13 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             emit(repository.getFavoritesMovies())
         }catch (e: Exception){
             emit(Resource.Failure(e))
+        }
+
+    }
+
+    fun deleteFavoriteMovie(movie: MovieEntity) {
+        viewModelScope.launch {
+            repository.deleteFavorite(movie)
         }
 
     }
