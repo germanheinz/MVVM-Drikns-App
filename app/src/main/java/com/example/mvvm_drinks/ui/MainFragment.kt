@@ -20,18 +20,23 @@ import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.domain.RepositoryImpl
 import com.example.mvvm_drinks.ui.ViewModel.MainAdapter
 import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
-import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import com.example.mvvm_drinks.vo.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
 // IMPLEMENTING CLICK LISTENER OF ADAPTER
+@AndroidEntryPoint
 class MainFragment : Fragment(), MainAdapter.OnMoviewClickListener {
 
     private val handler: Handler = Handler()
     private var runnable: Runnable? = null
 
-    val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSourceImpl(
-        AppDataBase.getDataBase(requireActivity().applicationContext)))) }
+//  INSTANCE VIEWMODEL WITH HILT
+    private val viewModel by activityViewModels<MainViewModel>()
+
+//  OLD INSTANCE OF VIEWMODEL
+//    val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSourceImpl(
+//        AppDataBase.getDataBase(requireActivity().applicationContext)))) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,27 +11,27 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mvvm_drinks.AppDataBase
 
 import com.example.mvvm_drinks.R
-import com.example.mvvm_drinks.data.model.DataSourceImpl
 import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.data.model.MovieEntity
-import com.example.mvvm_drinks.domain.RepositoryImpl
 import com.example.mvvm_drinks.ui.ViewModel.MainAdapter
 import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
-import com.example.mvvm_drinks.ui.ViewModel.VMFactory
 import com.example.mvvm_drinks.vo.Resource
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment(), MainAdapter.OnMoviewClickListener {
 
-    val viewModel by activityViewModels<MainViewModel>{ VMFactory(
-        RepositoryImpl(
-            DataSourceImpl(
-                AppDataBase.getDataBase(requireActivity().applicationContext))
-        )
-    ) }
+    private val viewModel by activityViewModels<MainViewModel>()
+
+//    private lateinit var adapter: MainAdapter
+
+//    val viewModel by activityViewModels<MainViewModel>{ VMFactory(
+//        RepositoryImpl(
+//            DataSourceImpl(
+//                AppDataBase.getDataBase(requireActivity().applicationContext))
+//        )
+//    ) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

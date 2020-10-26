@@ -4,8 +4,9 @@ import com.example.mvvm_drinks.data.model.DataSourceImpl
 import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.data.model.MovieEntity
 import com.example.mvvm_drinks.vo.Resource
+import javax.inject.Inject
 
-class RepositoryImpl(private val dataSource: DataSource) : Repository{
+class RepositoryImpl @Inject constructor(private val dataSource: DataSource) : Repository{
 
     override suspend fun getMovies(movieName : String): Resource<List<Movie>> {
         return dataSource.getMovieByName(movieName)

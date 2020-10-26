@@ -9,22 +9,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.example.mvvm_drinks.AppDataBase
-
 import com.example.mvvm_drinks.R
-import com.example.mvvm_drinks.data.model.DataSourceImpl
 import com.example.mvvm_drinks.data.model.Movie
 import com.example.mvvm_drinks.data.model.MovieEntity
-import com.example.mvvm_drinks.domain.RepositoryImpl
 import com.example.mvvm_drinks.ui.ViewModel.MainViewModel
-import com.example.mvvm_drinks.ui.ViewModel.VMFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail_movie.*
 
-
+@AndroidEntryPoint
 class DetailMovieFragment : Fragment() {
 
-    val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSourceImpl(
-        AppDataBase.getDataBase(requireActivity().applicationContext)))) }
+//  INSTANCE VIEWMODEL WITH HILT
+    private val viewModel by activityViewModels<MainViewModel>()
+
+//  OLD INSTANCE OF VIEWMODEL
+//  val viewModel by activityViewModels<MainViewModel>{ VMFactory(RepositoryImpl(DataSourceImpl(
+//  AppDataBase.getDataBase(requireActivity().applicationContext)))) }
 
     private lateinit var movie: Movie
 
